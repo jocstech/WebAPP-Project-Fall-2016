@@ -1,0 +1,43 @@
+body {
+  text-align: center;
+}
+
+#countryWheel{
+  display:inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+#countryWheel:after{
+  content:"";
+  background: red;
+  border: 2px solid white;
+  position:absolute;
+  top: -7px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -7px;
+  transform: rotate(45deg);
+  visibility: hidden;
+}
+
+#foodWheel{
+  display:inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+#foodWheel:after{
+  content:"";
+  background: red;
+  border: 2px solid white;
+  position:absolute;
+  top: -7px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -7px;
+  transform: rotate(45deg);
+  visibility: hidden;
+}
