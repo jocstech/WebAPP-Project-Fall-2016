@@ -76,6 +76,7 @@ function animation() {
   if(lock && !spinningSpeed){
     var decisionIndex = Math.floor(((360 - angle - 90) % 360) / sliceAngle);
     decisionIndex = (slices+decisionIndex)%slices;
+    // store the result:
     result = itmes[decisionIndex];
     return $('#result').html("You got:</br>"+result);
   }
@@ -150,8 +151,6 @@ function getFontSize(text) {
 function getCanvas() {
     return this.wheelCanvas;
 }
-
-
 
 
 
