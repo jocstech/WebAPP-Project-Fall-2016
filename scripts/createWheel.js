@@ -18,11 +18,12 @@ var result;
 
 
 // constructor
-function createWheel(list) {
+function createWheel(canvas,list) {
     itmes = list;
+    wheelCanvas = canvas.getContext('2d');
     initialize();
+    eventsListenner(canvas);
     animation();
-    eventsListenner();
 }
 
 
@@ -36,7 +37,6 @@ function initialize() {
     angle = rand(0, 360);
     speed = 0;
     slowDownRand = 0;
-    wheelCanvas = canvas.getContext('2d');
     width = canvas.width; // size
     center = width/2;      // center
     stop = false;
@@ -44,12 +44,16 @@ function initialize() {
     
 }
 
-function eventsListenner() {
-    $("#canvas").click(function(){
+function eventsListenner(canvas) {
+    $(canvas).click(function(){
         stop = true;
         // jQueryUI lib pulsate effct:
         $(this).effect("pulsate", { times:6 }, 2000);
 });
+}
+
+function setStyle(canvas) {
+    
 }
 
 function animation() {
@@ -96,7 +100,7 @@ function drawText(angle, text) {
     wheelCanvas.save();
     wheelCanvas.translate(center, center);
     wheelCanvas.rotate(degreeToRadius(angle));
-    wheelCanvas.textAlign = "center";
+    wheelCanvas.textAlign = "left";
     wheelCanvas.fillStyle = "#fff";
     wheelCanvas.font = 'bold '+getFontSize(text)+'px sans-serif';
     wheelCanvas.shadowColor = "#111";

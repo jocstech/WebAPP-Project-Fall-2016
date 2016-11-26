@@ -25,3 +25,7 @@ body {
 #result{
     font-size: 22px;
 }
+
+#indictor {
+    width: 30px;
+}
