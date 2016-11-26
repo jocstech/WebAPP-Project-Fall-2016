@@ -5,8 +5,8 @@ var itmes=[]; // items on the wheel
 var slices;
 var sliceAngle;
 var angle;
-var speed;
-var slowDownRand;
+var spinningSpeed;
+var deceleration;
 var wheelCanvas; // wheel canvas
 var width; // wheel size
 var center; // center point
@@ -35,8 +35,8 @@ function initialize() {
     slices = colour.length;
     sliceAngle = 360/slices;
     angle = rand(0, 360);
-    speed = 0;
-    slowDownRand = 0;
+    spinningSpeed = 0;
+    deceleration = 0;
     width = canvas.width; // size
     center = width/2;      // center
     stop = false;
@@ -57,27 +57,27 @@ function setStyle(canvas) {
 }
 
 function animation() {
-  angle += speed;
+  angle += spinningSpeed;
   angle %= 360;
 
-  // Increment speed
-  if(!stop && speed<3){
-    speed = speed+1 * 0.1;
+  // Increment spinningSpeed
+  if(!stop && spinningSpeed<3){
+    spinningSpeed = spinningSpeed+1 * 0.1;
   }
   // Decrement Speed
   if(stop){
     if(!lock){
       lock = true;
-      slowDownRand = rand(0.994, 0.999);
+      deceleration = rand(0.994, 0.999);
     } 
-    speed = speed>0.2 ? speed*=slowDownRand : 0;
+    spinningSpeed = spinningSpeed>0.2 ? spinningSpeed*=deceleration : 0;
   }
   // Stopped!
-  if(lock && !speed){
-    var decisionIndex = Math.floor(((360 - angle - 90) % 360) / sliceAngle); // angle 2 Array Index
+  if(lock && !spinningSpeed){
+    var decisionIndex = Math.floor(((360 - angle - 90) % 360) / sliceAngle);
     decisionIndex = (slices+decisionIndex)%slices;
     result = itmes[decisionIndex];
-    return $('#result').html("You got:</br>"+result); // Get Array Item from end Degree
+    return $('#result').html("You got:</br>"+result);
   }
 
   drawWheel();
