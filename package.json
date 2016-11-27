@@ -1,0 +1,21 @@
+{
+  "name": "FoodWheel Nodejs Application",
+  "version": "1.0.0",
+  "description": "A sample application showing the use of MongoDB via Mongoose.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yulong(Joe) Fang",
+  "license": "0BSD",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.20",
+    "node-uuid": "^1.4.7",
+    "pug": "^2.0.0-beta3"
+  }
+}

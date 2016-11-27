@@ -74,8 +74,8 @@ function animation() {
   }
   // Stopped!
   if(lock && !spinningSpeed){
-    var decisionIndex = Math.floor(((360 - angle - 90) % 360) / sliceAngle);
-    decisionIndex = (slices+decisionIndex)%slices;
+    var decisionIndex = Math.floor(((360 - angle - 0) % 360) / sliceAngle);
+    decisionIndex = (decisionIndex+slices)%slices;
     // store the result:
     result = itmes[decisionIndex];
     return $('#result').html("You got:</br>"+result);
@@ -95,6 +95,17 @@ function drawSlice(angle, colour) {
   wheelCanvas.arc(center, center, width/2, degreeToRadius(angle), degreeToRadius(angle+sliceAngle));
   wheelCanvas.lineTo(center, center);
   wheelCanvas.fill();
+}
+
+function drawCircle() {
+    wheelCanvas.beginPath();
+    wheelCanvas.fillStyle = 'black';
+    wheelCanvas.arc(center,center,width/10,0,2*Math.PI);
+    wheelCanvas.fill();
+    wheelCanvas.beginPath();
+    wheelCanvas.fillStyle = 'white';
+    wheelCanvas.arc(center,center,width/10-1,0,2*Math.PI);
+    wheelCanvas.fill();
 }
 
 function drawText(angle, text) {
@@ -119,7 +130,7 @@ function drawWheel() {
     drawText(angle+sliceAngle/2, itmes[i]);
     angle += sliceAngle;
   }
-   
+    drawCircle();
 }
 
 // Utilities
@@ -150,6 +161,10 @@ function getFontSize(text) {
 
 function getCanvas() {
     return this.wheelCanvas;
+}
+
+function getWheelResult() {
+    return this.result;
 }
 
 

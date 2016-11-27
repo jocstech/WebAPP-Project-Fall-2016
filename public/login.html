@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Food Wheel</title>
+    <link type="text/css" rel="stylesheet" href="styles/global_style.css" />
+    <!--Bootstrap 3.3.7-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--JQuery UI 1.12.1-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!--JQuery 3.1.1-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="web-content" class="container">
+        <div id="header" class="jumbotron well">
+            <h1><span class="glyphicon glyphicon-star"></span>FoodWheel</h1>
+            <h2>WebAPP Final Project Demo</h2> <small>A Meal Decision Wheel: FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.</small> </div>
+        <div id="wrapper">
+            <div id="login" class="center-vertical">
+                <form id="form-login" method="post" class="well">
+                    <h2>Hello Foodie!</h2>
+                    <h6>Please Login To Your Account</h6>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="username" name="user" class="form-control"> </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="password" name="pass" class="form-control"> </div>
+                    <div class="controls">
+                        <button type="button" class="btn btn-default button-rememember-me"><span class="glyphicon button-rememember-me-glyph glyphicon-unchecked"></span>Remember Me</button>
+                        <button type="submit" class="btn btn-primary button-sign-in"><span class="glyphicon glyphicon-lock"></span>Sign In</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <div class="btm-links .form-inline">
+                        <div id="forgot-password"><a href="#">Forgot Your Password?</a></div>
+                        <div id="create-account"><a href="/signup">Create An Account</a></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="scripts/global_script.js"></script>
+</body>
+
+</html>
