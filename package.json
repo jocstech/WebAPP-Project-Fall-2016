@@ -1,13 +1,17 @@
 {
-  "name": "FoodWheel Nodejs Application",
+  "name": "foodwheel-nodejs-application",
   "version": "1.0.0",
   "description": "FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "Yulong(Joe) Fang <jocstech@gmail.com>",
+  "website": {
+    "url": "https://github.com/jocstech/WebAPP-Project-Fall-2016"
   },
-  "author": "Yulong(Joe) Fang",
-  "license": "0BSD",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jocstech/WebAPP-Project-Fall-2016.git"
+  },
+  "license": "BSD",
   "dependencies": {
     "assert": "^1.4.1",
     "bcrypt-nodejs": "0.0.3",
@@ -17,5 +21,8 @@
     "mongoose": "^4.4.20",
     "node-uuid": "^1.4.7",
     "pug": "^2.0.0-beta3"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
