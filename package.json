@@ -1,7 +1,7 @@
 {
   "name": "FoodWheel Nodejs Application",
   "version": "1.0.0",
-  "description": "A sample application showing the use of MongoDB via Mongoose.",
+  "description": "FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
