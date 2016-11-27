@@ -6,20 +6,24 @@ var path = require('path');
 
 // Configuration
 
-// parsing POST data
+// Parsing POST data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// server port
+// Server port
 app.set('port', process.env.PORT || 3000);
 
-// static files
+// Static files
 app.use(express.static('public'));
 
 
 // Functions:
+
 var preusername = 'jocstech';
 var prepassword = 'jocstech';
+
+
+// User authentication verification
 
 function usernameAuth(username,password) {
     // TODO:
@@ -41,7 +45,8 @@ app.post('/login', function(req, res) {
     var password = req.body.pass;
     
     if(usernameAuth(username, password)) {
-        res.sendFile(path.join(__dirname + '/public/foodwheel.html'));
+        res.sendFile(path.join(__dirname + '/public/home.html'),{username:username});
+        //res.send(username);
         console.log(username + ' Login Good !!!');
     } else {
         console.log(username + ' Incorrect Username!!!');

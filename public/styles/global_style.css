@@ -1,0 +1,37 @@
+#logo {
+    width: 60px;
+}
+
+#logobottom {
+    width: 20px;
+}
+
+#login {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+
+#floating-top {
+    position: absolute;
+    left: 70%;
+    top: 10px;
+}
+
+.showborder {
+    border: 2px solid red;
+}
+
+.appicon {
+    padding: 25px;
+    font-size: 1.3em;
+}
+
+.icon {
+    width: 100%;
+}
+
+#apptitle {
+    font-size: 22px;
+    font-weight: 600;
+}

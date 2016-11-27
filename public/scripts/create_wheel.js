@@ -108,7 +108,6 @@ function drawCircle() {
     wheelCanvas.fillStyle = 'white';
     wheelCanvas.arc(center,center,width/10-2,0,2*Math.PI);
     wheelCanvas.fill();
-    
     wheelCanvas.beginPath();
     wheelCanvas.strokeStyle = '#999';
     wheelCanvas.lineWidth= 5;
@@ -116,9 +115,26 @@ function drawCircle() {
     wheelCanvas.lineTo(center,center+(width/10-1));
     wheelCanvas.stroke();
     wheelCanvas.beginPath();
+    wheelCanvas.strokeStyle = '#f00';
     wheelCanvas.lineTo(center-(width/10-1),center);
     wheelCanvas.lineTo(center+(width/10-1),center);
     wheelCanvas.stroke();
+    // inner indictor
+    wheelCanvas.beginPath();
+    wheelCanvas.fillStyle = '#f00';
+    wheelCanvas.lineTo(center+(width/10-25),center-15);
+    wheelCanvas.lineTo(center+(width/10+10),center);
+    wheelCanvas.lineTo(center+(width/10-25),center+15);
+    wheelCanvas.closePath();
+    wheelCanvas.fill();
+    // outter indictor
+    wheelCanvas.beginPath();
+    wheelCanvas.fillStyle = '#f00';
+   wheelCanvas.lineTo(center+(width/10-25),center-15);
+    wheelCanvas.lineTo(center+(width/10+10),center);
+    wheelCanvas.lineTo(center+(width/10-25),center+15);
+    wheelCanvas.closePath();
+    wheelCanvas.fill();
 }
 
 function drawText(angle, text) {

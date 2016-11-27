@@ -13,7 +13,7 @@ Moe savari	|100604449
 
 ###A Meal Decision Wheel: FoodWheeler
 
-FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
+FoodWheeler is a web-based(Node.js) application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
 
 ##Configuration(Installation):
 ```
@@ -33,3 +33,18 @@ FoodWheeler is a web-based application that allows users to choice their food by
 3. Type <mark>**'npm install'**</mark> in the terminal.
 4. Type <mark>**'node index'**</mark> in the terminal.
 5. Open a web browser and go to <http://127.0.0.1:3000> or <http://localhost:3000> to see the project.
+
+
+##Web Techniques Applied
+
+1. HTML/HTML5/CSS
+2. DOM/Dynamic HTML
+3. AJAX/JSON/XML
+2. JavaScript
+3. Bootsrap
+4. JQuery
+5. JQueryUI
+6. Node.js
+7. MongoDB/Mongoose
+8. SVG
+8. D3
