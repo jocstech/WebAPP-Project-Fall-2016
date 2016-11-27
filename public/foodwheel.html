@@ -18,8 +18,14 @@
     </head>
 
 <body>
-    <div id="web-content">
-        <div id="wheelDisplay" class="well">
+    <div id="web-content" class="container">
+       <header class="well">
+           <h1>Food Wheel</h1>
+           <h3>(Please click the wheel to stop)</h3>
+       </header>
+    
+       <div id="wrap">
+           <div id="wheelDisplay" class="well">
             <div id="foodwheel"> 
                <canvas id="wheel_canvas" class="wheel" width="1000" height="1000"> </canvas>
                <img id="indictor" src="assets/images/arrow_down.svg" alt="arrow down">
@@ -27,6 +33,11 @@
             </div>
             <p id="result">Your Food Choice:(Please click the wheel to stop)</p>
         </div>
+       </div>
+       
+       <footer class="well">
+           <p>Welcome</p>
+       </footer>
     </div>
     <script type="text/javascript" src="scripts/food_wheel.js"></script>
 </body>

@@ -16,6 +16,20 @@ app.set('port', process.env.PORT || 3000);
 // static files
 app.use(express.static('public'));
 
+
+// Functions:
+var preusername = 'jocstech';
+var prepassword = 'jocstech';
+
+function usernameAuth(username,password) {
+    // TODO:
+    if(username == preusername && password == prepassword)
+        return true;
+    else
+        return false;
+}
+
+
 // Routes
 
 app.get('/', function(req, res) {
@@ -23,8 +37,17 @@ app.get('/', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    var username = req.body.username;
-    console.log(username + 'Logined !!!');
+    var username = req.body.user;
+    var password = req.body.pass;
+    
+    if(usernameAuth(username, password)) {
+        res.sendFile(path.join(__dirname + '/public/foodwheel.html'));
+        console.log(username + ' Login Good !!!');
+    } else {
+        console.log(username + ' Incorrect Username!!!');
+    }
+    
+    
 });
 
 

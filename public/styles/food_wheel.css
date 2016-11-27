@@ -4,9 +4,7 @@
 }
 
 #wheelDisplay {
-    position: absolute;
-    left: 10%;
-    right: 10%;
+
 }
 
 #foodwheel {
@@ -21,9 +19,8 @@
 #indictor {
     position:absolute;
     right: 0;
-    top: 0;
+    top: 60%;
     width: 10%;
-    margin-top: 45%;
 }
 
 #result{
