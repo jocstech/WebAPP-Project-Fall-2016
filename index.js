@@ -1,10 +1,14 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
+var bodyParser = require("body-parser");
 var path = require('path');
 
 
-//app.use(bodyParser.urlencoded({ extended: true })); 
+// Configuration
+
+// parsing POST data
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // server port
 app.set('port', process.env.PORT || 3000);
@@ -19,7 +23,8 @@ app.get('/', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    console.log("Logined !!!");
+    var username = req.body.username;
+    console.log(username + 'Logined !!!');
 });
 
 

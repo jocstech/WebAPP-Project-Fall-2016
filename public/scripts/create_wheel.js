@@ -48,7 +48,8 @@ function eventsListenner(canvas) {
     $(canvas).click(function(){
         stop = true;
         // jQueryUI lib pulsate effct:
-        $(this).effect("pulsate", { times:6 }, 2000);
+        if(result == null)
+            $(this).effect("pulsate", { times:6 }, 2000);
 });
 }
 
@@ -78,6 +79,7 @@ function animation() {
     decisionIndex = (decisionIndex+slices)%slices;
     // store the result:
     result = itmes[decisionIndex];
+    drawResText(result);
     return $('#result').html("You got:</br>"+result);
   }
 
@@ -104,8 +106,19 @@ function drawCircle() {
     wheelCanvas.fill();
     wheelCanvas.beginPath();
     wheelCanvas.fillStyle = 'white';
-    wheelCanvas.arc(center,center,width/10-1,0,2*Math.PI);
+    wheelCanvas.arc(center,center,width/10-2,0,2*Math.PI);
     wheelCanvas.fill();
+    
+    wheelCanvas.beginPath();
+    wheelCanvas.strokeStyle = '#999';
+    wheelCanvas.lineWidth= 5;
+    wheelCanvas.lineTo(center,center-(width/10-1));
+    wheelCanvas.lineTo(center,center+(width/10-1));
+    wheelCanvas.stroke();
+    wheelCanvas.beginPath();
+    wheelCanvas.lineTo(center-(width/10-1),center);
+    wheelCanvas.lineTo(center+(width/10-1),center);
+    wheelCanvas.stroke();
 }
 
 function drawText(angle, text) {
@@ -119,7 +132,21 @@ function drawText(angle, text) {
     wheelCanvas.shadowOffsetX = 4; 
     wheelCanvas.shadowOffsetY = 4; 
     wheelCanvas.shadowBlur = 10;
-    wheelCanvas.fillText(text, 130, 10);
+    wheelCanvas.fillText(text, 200, getFontHeight(text));
+    wheelCanvas.restore();
+}
+
+function drawResText(text) {
+    wheelCanvas.save();
+    wheelCanvas.translate(center, center+10);
+    wheelCanvas.textAlign = "center";
+    wheelCanvas.fillStyle = "#000";
+    wheelCanvas.font = 'bold '+getFontSize(text)+'px sans-serif';
+    wheelCanvas.shadowColor = "#fff";
+    wheelCanvas.shadowOffsetX = 1; 
+    wheelCanvas.shadowOffsetY = 1; 
+    wheelCanvas.shadowBlur = 8;
+    wheelCanvas.fillText(text, 0, 0);
     wheelCanvas.restore();
 }
 
@@ -156,7 +183,11 @@ function getRandColour() {
 
 
 function getFontSize(text) {
-    return 200*(1/text.length)+5;
+    return 200*(2/text.length)+5;
+}
+
+function getFontHeight(text) {
+    return 200*(1/text.length)-10;
 }
 
 function getCanvas() {
