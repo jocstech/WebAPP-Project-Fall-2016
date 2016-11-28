@@ -53,10 +53,8 @@ function eventsListenner(canvas) {
 });
 }
 
-function setStyle(canvas) {
-    
-}
 
+// setup the animation callback
 function animation() {
   angle += spinningSpeed;
   angle %= 360;
@@ -101,6 +99,8 @@ function drawSlice(angle, colour) {
   wheelCanvas.fill();
 }
 
+
+// Draw additionals
 function drawCircle() {
     wheelCanvas.beginPath();
     wheelCanvas.fillStyle = 'black';

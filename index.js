@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var path = require('path');
+var mongoose = require('mongoose');
 
 
 // Configuration
@@ -10,27 +11,65 @@ var path = require('path');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Server port
-app.set('port', process.env.PORT || 3000);
+
 
 // Static files
 app.use(express.static('public'));
 
 
-// Functions:
+// Database-related
 
+mongoose.connect('localhost:27017/foodwheel');
+
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+	username: {type: String, 
+              unique: true,
+              index: true},
+	password: String
+}, {collection: 'users'});
+var User = mongoose.model('user', userSchema);
+
+// demo account:
 var preusername = 'jocstech';
 var prepassword = 'jocstech';
+
+
+// predefined database data // if you are using mongoDB client enter data, plz delete fellowing.
+var newUser1 = new User({username: preusername ,password: prepassword});
+var newUser2 = new User({username: 'bsmith' ,password: 'password'});
+var newUser3 = new User({username: 'rfortier' ,password: 'password'});
+
+newUser1.save();
+newUser2.save();
+newUser3.save();
+
+// Functions:
+
+
 
 
 // User authentication verification
 
 function usernameAuth(username,password) {
     // TODO:
-    if(username == preusername && password == prepassword)
-        return true;
-    else
-        return false;
+    var res = false;
+    User.find({username: username}).then(function(results) {
+		if (results.length > 0) {
+				// login successful
+            res = true;
+		} else {
+			// login failed:  show the login page again, passing an error string
+			res = false;
+		}
+	});
+    return res;
+}
+
+function usernameAuth2(username,password) {
+    // TODO:
+    return username==preusername &&password==prepassword;
 }
 
 
@@ -40,20 +79,27 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/login.html'));
 });
 
+app.get('/signup', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/login.html'));
+});
+
 app.post('/login', function(req, res) {
     var username = req.body.user;
     var password = req.body.pass;
     
-    if(usernameAuth(username, password)) {
+    if(usernameAuth2(username, password)) {
         res.sendFile(path.join(__dirname + '/public/home.html'),{username:username});
         //res.send(username);
-        console.log(username + ' Login Good !!!');
+        console.log(username + '/'+password+ 'Login Good !!!');
     } else {
-        console.log(username + ' Incorrect Username!!!');
+        console.log(username + '/'+password+' Incorrect Username!!!');
     }
     
     
 });
+
+// Server port
+app.set('port', process.env.PORT || 3000);
 
 
 app.listen(app.get('port'));

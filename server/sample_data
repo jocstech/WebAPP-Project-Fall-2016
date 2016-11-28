@@ -1,0 +1,10 @@
+db.foodwheel.insertMany(
+[{username: 'jocstech', 
+ password: 'jocstech'},
+ {username: 'user123', 
+ password: 'user123'},
+ {username: 'appoi908', 
+ password: 'appoi908'},
+ {username: 'lopo123', 
+ password: 'lopo123'},
+]);

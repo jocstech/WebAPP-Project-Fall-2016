@@ -15,6 +15,9 @@ Moe Savari	|100604449
 
 FoodWheel is a web-based(Node.js) application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
 
+##Screenshots:
+
+
 ##Configuration(Installation):
 ```
 * Required Running Environments

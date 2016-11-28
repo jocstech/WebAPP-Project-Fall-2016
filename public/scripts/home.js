@@ -16,14 +16,5 @@ function addEffct(obj) {
     });
 }
 
-function sendNotification(text){
-    $("#notification").fadeIn("slow");
-     $("#notification").html(text);
-    
-    setTimeout(function(){
-        $("#notification").fadeOut("slow");
-    },6000);
-}
-
 
 
