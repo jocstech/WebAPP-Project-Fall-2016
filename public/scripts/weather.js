@@ -11,7 +11,28 @@ $(document).ready(function () {
     userLat=43.9454;
     userLng=-78.8964;
     updateInfo();
-    //drawAreaChart();
+    if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var currentLoc = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+              
+              userLat = currentLoc.lat;
+              userLng = currentLoc.lng;
+              
+              updateInfo();
+              
+          }, function() {
+              sendNotification('Location Disabled!');
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          sendNotification('Browser doesn\'t support Geolocation');
+    }  
+    
+    
+    
         
 });
 

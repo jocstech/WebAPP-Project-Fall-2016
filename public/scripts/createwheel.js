@@ -80,6 +80,8 @@ function animation() {
     // store the result:
     result = itmes[decisionIndex];
     drawResText(result);
+      stop = true;
+    lock = false;
     return $('#wheelresult').html(result);
   }
 

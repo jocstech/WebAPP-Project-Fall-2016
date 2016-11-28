@@ -29,4 +29,8 @@
     font-family: sans-serif;
 }
 
+#msg {
+    color: red;
+    font-weight: 500;
+}
 

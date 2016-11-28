@@ -73,3 +73,15 @@ function getDateTime() {
     var dateTime = 'Time: '+year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;   
      return dateTime;
 }
+
+
+function sendNotification(text){
+    $("#notification").fadeIn("slow");
+     $("#notification").html(text);
+    
+    setTimeout(function(){
+        $("#notification").fadeOut("slow");
+    },6000);
+}
+
+
