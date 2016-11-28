@@ -23,15 +23,15 @@ FoodWheel is a web-based(Node.js) application that allows users to choice their 
 ##Screenshots:
 
 ####Login System:
-![Login Screen](README.img/ss1.png)
+<p align="center"><img src="README.img/ss1.png" width="400"></p>
 ####Application Home Page:
-![Login Screen](README.img/ss2.png)
+<p align="center"><img src="README.img/ss2.png" width="400"></p>
 ####Food Wheel:
-![Login Screen](README.img/ss3.png)
+<p align="center"><img src="README.img/ss3.png" width="400"></p>
 ####Geocoding Map Places:
-![Login Screen](README.img/ss4.png)
+<p align="center"><img src="README.img/ss4.png" width="400"></p>
 ####Desktop View Home Page:
-![Login Screen](README.img/ss5.png)
+<p align="center"><img src="README.img/ss5.png" width="400"></p>
 
 ##Configuration(Installation):
 ```
