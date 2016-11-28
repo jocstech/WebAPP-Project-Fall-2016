@@ -137,7 +137,7 @@ function downloadForecastForD3(){
                 var low = element.children("temperature").attr("min"); // low temp
                 var avgTemp = (parseFloat(high)+parseFloat(low))/2; // avarage temp
                 avgTemp = Math.round(avgTemp * 100) / 100
-                console.log({date:date,temp:avgTemp});
+                //console.log({date:date,temp:avgTemp});
                 list[count++]={date:date,temp:avgTemp};
             });
         }});
@@ -155,16 +155,28 @@ function drawAreaChart() {
     
 d3.select(".chart").selectAll("h4").text("16 Days Weather Forecasts Average Temp Chart");    
     
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Temperature:</strong> <span style='color:red'>" + d.temp + "&#8451;</span>";
+});
+
+    
 var svg = d3.select("#trend"),
-    margin = {top: 20, right: 20, bottom: 50, left: 40},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom;
+    padding = {top: 20, right: 20, bottom: 50, left: 40},
+    width = +svg.attr("width") - padding.left - padding.right,
+    height = +svg.attr("height") - padding.top - padding.bottom;
+    
+    // X,Y Scale
     
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
     y = d3.scaleLinear().rangeRound([height, 0]);
 
+
+    
 var g = svg.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + padding.left + "," + padding.top + ")");
 
     x.domain(list.map(function(d) { return d.date; }));
     y.domain([d3.min(list,function(d){return d.temp;})-2, d3.max(list, function(d) { return d.temp; })+2]);
@@ -189,7 +201,7 @@ var g = svg.append("g")
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("Temperature");
+      .text("Temperature;");
 
     g.selectAll(".bar")
     .data(list)
@@ -198,7 +210,24 @@ var g = svg.append("g")
       .attr("x", function(d) { return x(d.date); })
       .attr("y", function(d) { return y(d.temp); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.temp); });
+      .attr("height", function(d) { return 0; })
+        .on('mouseover',tip.show)
+        .on('mouseout',tip.hide)
+        .transition()
+        .delay(function(d, i) { return i * 200; })
+		.duration(1000)
+        .attr("height", function(d) { return height - y(d.temp); })
+        
 
+    svg.call(tip);
+        // Center zero degree line
+    svg.append("line")
+        .attr("stroke-dasharray","1,1")
+        .attr("x1", 34)
+        .attr("y1", height/2+38.5)
+        .attr("x2", width+38.5)
+        .attr("y2", height/2+38)
+        .attr("stroke-width", 0.9)
+        .attr("stroke", "red");
     
 }
