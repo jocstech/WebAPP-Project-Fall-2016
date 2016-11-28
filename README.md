@@ -30,6 +30,8 @@ FoodWheel is a web-based(Node.js) application that allows users to choice their 
 <p align="center"><img src="README.img/ss3.png" width="400"></p>
 ####Geocoding Map Places:
 <p align="center"><img src="README.img/ss4.png" width="400"></p>
+####D3.js Application(Temp Bar Chart):
+<p align="center"><img src="README.img/ss6.png" width="400"></p>
 ####Desktop View Home Page:
 <p align="center"><img src="README.img/ss5.png" width="400"></p>
 
