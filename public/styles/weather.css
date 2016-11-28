@@ -1,0 +1,28 @@
+#cityname {
+    text-align: left;
+    font-size: 22px;
+}
+
+#weatherBox {
+    padding: 10px 30px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background: #D8EEF2;
+}
+
+
+.symbol {
+    width: 40px;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  display: none;
+}

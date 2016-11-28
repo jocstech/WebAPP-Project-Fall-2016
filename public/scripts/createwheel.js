@@ -80,7 +80,7 @@ function animation() {
     // store the result:
     result = itmes[decisionIndex];
     drawResText(result);
-    return $('#result').html("You got:</br>"+result);
+    return $('#wheelresult').html(result);
   }
 
   drawWheel();
@@ -129,10 +129,10 @@ function drawCircle() {
     wheelCanvas.fill();
     // outter indictor
     wheelCanvas.beginPath();
-    wheelCanvas.fillStyle = '#f00';
-   wheelCanvas.lineTo(center+(width/10-25),center-15);
-    wheelCanvas.lineTo(center+(width/10+10),center);
-    wheelCanvas.lineTo(center+(width/10-25),center+15);
+    wheelCanvas.fillStyle = '#fff';
+   wheelCanvas.lineTo(center+(width/2),center-15);
+    wheelCanvas.lineTo(center+(width/2-20),center);
+    wheelCanvas.lineTo(center+(width/2),center+15);
     wheelCanvas.closePath();
     wheelCanvas.fill();
 }

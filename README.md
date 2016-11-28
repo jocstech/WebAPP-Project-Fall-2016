@@ -6,14 +6,14 @@
 Name			|Student Number
 :-------------|---------------
 Yulong Fang	|100471536
-Moe savari	|100604449 
+Moe Savari	|100604449 
 
 
 ##Introduction:
 
-###A Meal Decision Wheel: FoodWheeler
+###A Dinning Decision Maker Web App: FoodWheel
 
-FoodWheeler is a web-based(Node.js) application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
+FoodWheel is a web-based(Node.js) application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
 
 ##Configuration(Installation):
 ```

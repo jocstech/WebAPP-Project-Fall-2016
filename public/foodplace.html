@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Food Wheel!</title>
+    <title>Food Places | Dinning Places</title>
     <!--favicon making  -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -31,47 +31,52 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- Bootstrap 3.3.7-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!--Coustamized CSS/JS-->
+    <!-- Google Maps JavaScript API-->
+    <!--Coustamized CSS-->
     <link type="text/css" rel="stylesheet" href="styles/globalstyle.css" />
+    <link type="text/css" rel="stylesheet" href="styles/foodplace.css" />
     <script type="text/javascript" src="scripts/globalscript.js"></script>
+ 
+    
 </head>
 
 <body>
+   <div id="loadinganimation">
+            <div id='loading-mask'></div>
+            <div id="loading">
+            <div class="loading-indicator"> 
+            <img id="loadinganim"src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" width="800" height="600"/>
+            <br/><span id="loading-msg">Loading ...</span>
+            <br/><span id="loading-msg">(Please enable your location)</span>
+            </div>
+           </div>
+           </div>
     <div id="floating-top"> <span id="currentTime"></span> </div>
     <div id="web-content" class="container">
         <div id="header" class="jumbotron well">
             <h1><span><img id="logo" src="assets/images/weel.png" alt="logo"></span>FoodWheel</h1>
             <h2>CSCI3230 Final Project Demo</h2> <small>A Meal Decision Wheel: FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.</small> </div>
         <div id="wrapper" class="well"> <span id="greeting"></span><span id="welcome">Welcome to aboard!</span><span id="usernameStr"></span>
-            <br><span id="apptitle">Applications Menu</span>
-            <button class="btn btn-info pull-right" onclick="goBack()">Logout</button>
+            <br><span id="apptitle">Dining Places On Map</span>
+            <button class="btn btn-info pull-right" onclick="goBack()">Back</button>
             <hr>
-            <div id="appslayout" class="row text-center">
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/foodwheel.html">
-                <img class="icon" src="assets/icons/food.png" alt="Food Wheel">
-                </a>
-                </span> Food Wheel </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/foodplace.html">
-                <img class="icon" src="assets/icons/places.png" alt="Dining Places">
-                </a>
-                </span> Dining Places </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/weather.html">
-                <img class="icon" src="assets/icons/weather.png" alt="Weathers">
-                </a>
-                </span> Weathers </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <img class="icon" src="assets/icons/system.png" alt="System">
-                </span> System </div>
+            
+            <div class="row">
+            <div id="map" class="col-sm-8"></div>
+            <div id="right-panel" class="col-sm-4">
+            <h2>Dining Places</h2>
+            <ul id="places"></ul>
+            <button id="more">More Places</button>
             </div>
+            </div>
+       
         </div>
         <footer class="well text-center"> <span class="pull-left">Copyright @ Jocstech Group 2016</span> <span><img id="logobottom" src="assets/images/weel.png" alt="logo"></span>
-            <div class="pull-right"> <span><a href="https://github.com/jocstech/WebAPP-Project-Fall-2016">About</a></span> <span><a href="/">&nbsp;&nbsp;Home</a></span> </div>
-        </footer>
+        <div class="pull-right"> <span><a href="https://github.com/jocstech/WebAPP-Project-Fall-2016">About</a></span> <span><a href="/">&nbsp;&nbsp;Home</a></span> </div>
+    </footer>
     </div>
-    <script type="text/javascript" src="scripts/home.js"></script>
+        <script type="text/javascript" src="scripts/geolocation.js"></script>
+       <script type="text/javascript" src="scripts/foodplace.js"></script>
 </body>
 
 </html>

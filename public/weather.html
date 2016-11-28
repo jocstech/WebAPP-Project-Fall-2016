@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Food Wheel!</title>
+    <title>Weather | Forecast</title>
     <!--favicon making  -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -31,9 +31,16 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- Bootstrap 3.3.7-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!--Coustamized CSS/JS-->
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!--Coustamized CSS-->
     <link type="text/css" rel="stylesheet" href="styles/globalstyle.css" />
+    <link type="text/css" rel="stylesheet" href="styles/weather.css" />
     <script type="text/javascript" src="scripts/globalscript.js"></script>
+    <script type="text/javascript" src="scripts/weather.js"></script>
+
+ 
+    
 </head>
 
 <body>
@@ -43,35 +50,89 @@
             <h1><span><img id="logo" src="assets/images/weel.png" alt="logo"></span>FoodWheel</h1>
             <h2>CSCI3230 Final Project Demo</h2> <small>A Meal Decision Wheel: FoodWheeler is a web-based application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.</small> </div>
         <div id="wrapper" class="well"> <span id="greeting"></span><span id="welcome">Welcome to aboard!</span><span id="usernameStr"></span>
-            <br><span id="apptitle">Applications Menu</span>
-            <button class="btn btn-info pull-right" onclick="goBack()">Logout</button>
+            <br><span id="apptitle">Weather and Forecast</span>
+            <button class="btn btn-info pull-right" onclick="goBack()">Back</button>
             <hr>
-            <div id="appslayout" class="row text-center">
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/foodwheel.html">
-                <img class="icon" src="assets/icons/food.png" alt="Food Wheel">
-                </a>
-                </span> Food Wheel </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/foodplace.html">
-                <img class="icon" src="assets/icons/places.png" alt="Dining Places">
-                </a>
-                </span> Dining Places </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <a href="/weather.html">
-                <img class="icon" src="assets/icons/weather.png" alt="Weathers">
-                </a>
-                </span> Weathers </div>
-                <div class="appicon col-xs-6 col-sm-3"> <span>
-                <img class="icon" src="assets/icons/system.png" alt="System">
-                </span> System </div>
+            <div class="chart">
+<!--                <svg width="960" height="500"></svg>-->
+            </div>
+            <hr>
+            <div id="cityname">City Name</div>
+            <div class="row">
+        <div id="weather" class="scol-xs-6 col-md-4">
+            <!--Current Weather Data-->
+                
+            <div id="weatherBox" >
+               <div id="weatherIcon"></div>
+                <h4>Temperature</h4>
+                <div id="currentTemp">Current: N/A</div>
+                <div id="lowTemp">Low: N/A</div>
+                <div id="hightTemp">Hight: N/A</div>
+                
+                
+                <h4>Outlook</h4>
+                
+                <div id="outlook">N/A</div>
+                
+                <h4>Wind</h4>
+                
+                <div id="direction">Direction: N/A</div>
+                <div id="speed">Speed: N/A</div>
+                
+                <h4>Clouds</h4>
+                <div id="cloudsall">Cloudiness: N/A</div>
+                
+                
+                <h4>Pressure</h4>
+                
+                <div id="pressure">N/A</div>
+                
+                <h4>Humidity</h4>
+                
+                <div id="humidity">N/A</div>
+                
+                 <h4>Atmospheric Pressure</h4>
+                <div id="sea_level">Sea Level: N/A</div>
+                <div id="grnd_level">Ground Level: N/A</div>
+                
+                <h4>Sun</h4>
+                <div id="sun">
+                <div id="sunrise">Sunrise:</div>
+                <div id="sunset">Sunset:</div>
+                </div>
+            </div>
+
+            
+        </div>
+        <div id="forecast" class="col-xs-12 col-md-8">
+            <!--Forecast Weather Data-->
+            <h4>Forecast </h4>
+            <table id="table" class="table table-hover">
+                <tr>
+                    <th>Date</th>
+                    <th>Symbol</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Wind</th>
+                    <th>Clouds</th>
+                </tr>
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+        </div>
             </div>
         </div>
         <footer class="well text-center"> <span class="pull-left">Copyright @ Jocstech Group 2016</span> <span><img id="logobottom" src="assets/images/weel.png" alt="logo"></span>
-            <div class="pull-right"> <span><a href="https://github.com/jocstech/WebAPP-Project-Fall-2016">About</a></span> <span><a href="/">&nbsp;&nbsp;Home</a></span> </div>
-        </footer>
+        <div class="pull-right"> <span><a href="https://github.com/jocstech/WebAPP-Project-Fall-2016">About</a></span> <span><a href="/">&nbsp;&nbsp;Home</a></span> </div>
+    </footer>
     </div>
-    <script type="text/javascript" src="scripts/home.js"></script>
+       
 </body>
 
 </html>
