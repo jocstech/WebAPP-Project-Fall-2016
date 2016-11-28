@@ -5,11 +5,14 @@ var userLat;
 var userLng;
 var forecast = {};
 var msg;
+var conut;
 
 $(document).ready(function () {
-
+    
+    // initialized location: will change later.
     userLat=43.9454;
     userLng=-78.8964;
+    
     updateInfo();
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -39,15 +42,17 @@ $(document).ready(function () {
 // Update the data
 function updateInfo(){
     // downloadWeather
-        downloadWeather();
-        // downloadForecast event
-        downloadForecast();
+    downloadWeather();
+    // downloadForecast event
+    downloadForecast();
+    // drawing the 16 days forecast trend chart.
+    drawAreaChart();
 }
 
 // ajax get JSON
 function downloadWeather () {
-    var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + userLat + '&lon=' + userLng + '&units=metric&APPID=' + APIKey;
-    $.getJSON(url,function(data){
+    var jsonURL = 'http://api.openweathermap.org/data/2.5/weather?lat=' + userLat + '&lon=' + userLng + '&units=metric&APPID=' + APIKey;
+    $.getJSON(jsonURL,function(data){
         //$("#goButton").after("&nbsp;&nbsp;&nbsp;City: "+ data.name);
         $("#cityname").html(data.name+','+data.sys.country);
         $("#weatherIcon").html('<img src="http://openweathermap.org/img/w/'+data.weather[0].icon+'.png">');
@@ -60,22 +65,21 @@ function downloadWeather () {
         $("#pressure").html("Pressure: "+data.main.pressure+"mB");
         $("#humidity").html("Humidity: "+data.main.humidity+"%");
         $("#cloudsall").html("Cloudiness: "+data.clouds.all+"%");
-        $("#sea_level").html("Sea Level: "+data.main.sea_level+"hPa");
-        $("#grnd_level").html("Ground Level: "+data.main.grnd_level+"hPa");
         $("#sunrise").html("Sunrise: "+new Date( data.sys.sunrise *1000).toString());
         $("#sunset").html("Sunset:" +new Date( data.sys.sunset *1000).toString());
     });
 }
 
+
 // ajax get XML 
 function downloadForecast(){
-    var xml = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+ userLat+ '&lon=' + userLng + '&mode=xml&units=metric&cnt=10&APPID=' + APIKey;
+    var xmlURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+ userLat+ '&lon=' + userLng + '&mode=xml&units=metric&cnt=10&APPID=' + APIKey;
     
     $("#table tr").slice( 1 , 11 ).remove();
     
     $.ajax({
         type: 'POST' ,
-        url: xml ,
+        url: xmlURL ,
         async:false ,
         dataType:"xml" ,
         success: function(docxml){
@@ -97,6 +101,7 @@ function downloadForecast(){
         }});
     }
 
+// helper: table tow creator
 function TableRow(trs){
     var htm = "<tr>"; 
     for(var i = 0; i < trs.length; i++){
@@ -110,52 +115,90 @@ function TableRow(trs){
     return htm;
 }
 
+// ajax get XML data from openweathermap, and put them into a 2 variable list.
+function downloadForecastForD3(){
+    var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+ userLat+ '&lon=' + userLng + '&mode=xml&units=metric&cnt=16&APPID=' + APIKey;
+    var list=[];
+
+    
+    $.ajax({
+        type: 'POST' ,
+        url: url ,
+        async: false ,
+        dataType: "xml" ,
+        success: function(docxml){
+            count = 0;
+            var root = $(docxml);
+            var msg = root.find('name').text(); // node value
+            root.find('time').each(function(){
+                var element = $(this);
+                var date = element.attr("day"); // node attr
+                var high = element.children("temperature").attr("max"); // high temp
+                var low = element.children("temperature").attr("min"); // low temp
+                var avgTemp = (parseFloat(high)+parseFloat(low))/2; // avarage temp
+                avgTemp = Math.round(avgTemp * 100) / 100
+                console.log({date:date,temp:avgTemp});
+                list[count++]={date:date,temp:avgTemp};
+            });
+        }});
+    return list;
+    }
+
+
+
+
+
+// D3.js - Data-Driven Documents
 function drawAreaChart() {
-//http://api.openweathermap.org/data/2.5/forecast/daily?lat=43.9454&lon=-78.8964&mode=json&units=metric&cnt=16&APPID=e441ce418c16dd855a0671396afed15f
+
+    var list = downloadForecastForD3();
     
-var jsonUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily?lat='+ userLat+ '&lon=' + userLng + '&mode=json&units=metric&cnt=10&APPID=' + APIKey;
+d3.select(".chart").selectAll("h4").text("16 Days Weather Forecasts Average Temp Chart");    
     
-var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+var svg = d3.select("#trend"),
+    margin = {top: 20, right: 20, bottom: 50, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
-
+    
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
     y = d3.scaleLinear().rangeRound([height, 0]);
 
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json(jsonUrl, function(error, json) {
-  
-    if (error) throw error;
-    
-    x.domain(data.map(function(d) { return d.list[0].dt; }));
-    y.domain([0, d3.max(data, function(d) { return d.list[0].temp.day; })]);
+    x.domain(list.map(function(d) { return d.date; }));
+    y.domain([d3.min(list,function(d){return d.temp;})-2, d3.max(list, function(d) { return d.temp; })+2]);
 
+
+    // drawing X-axis
     g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call( d3.axisBottom(x))
+      .selectAll("text")
+        .attr("transform", "rotate(45)")
+        .style("text-anchor", "start");
+    
 
+    // drawing Y-axis
     g.append("g")
       .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y).ticks(10, "%"))
-    .append("text")
+      .call(d3.axisLeft(y).ticks(20, "s"))
+      .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("Frequency");
+      .text("Temperature");
 
     g.selectAll(".bar")
-    .data(data)
+    .data(list)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("x", function(d) { return x(d.date); })
+      .attr("y", function(d) { return y(d.temp); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.frequency); });
-});
+      .attr("height", function(d) { return height - y(d.temp); });
+
     
 }
