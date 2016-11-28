@@ -13,10 +13,25 @@ Moe Savari	|100604449
 
 ###A Dinning Decision Maker Web App: FoodWheel
 
+Feature:
+
+1. Fully responsive mobile first web application
+2. Lightweight system structure
+
 FoodWheel is a web-based(Node.js) application that allows users to choice their food by just spinning a wheel simply. The wheel will help user to choose their next meal to eat from the database randomly.
 
 ##Screenshots:
 
+####Login System:
+![Login Screen](README.img/ss1.png)
+####Application Home Page:
+![Login Screen](README.img/ss2.png)
+####Food Wheel:
+![Login Screen](README.img/ss3.png)
+####Geocoding Map Places:
+![Login Screen](README.img/ss4.png)
+####Desktop View Home Page:
+![Login Screen](README.img/ss5.png)
 
 ##Configuration(Installation):
 ```
